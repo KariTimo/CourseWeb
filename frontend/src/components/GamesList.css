@@ -1,0 +1,594 @@
+.games-container {
+    padding: 20px;
+  }
+
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .games-grid .game-card {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+  }
+
+  .games-grid .game-card:nth-child(1) { animation-delay: 0.1s; }
+  .games-grid .game-card:nth-child(2) { animation-delay: 0.2s; }
+  .games-grid .game-card:nth-child(3) { animation-delay: 0.3s; }
+  .games-grid .game-card:nth-child(4) { animation-delay: 0.4s; }
+  .games-grid .game-card:nth-child(5) { animation-delay: 0.5s; }
+  .games-grid .game-card:nth-child(6) { animation-delay: 0.6s; }
+  .games-grid .game-card:nth-child(7) { animation-delay: 0.7s; }
+  .games-grid .game-card:nth-child(8) { animation-delay: 0.4s; }
+
+
+  .game-card {
+    background: var(--background-light);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 450px; /* Фиксированная высота карточки */
+  }
+  
+  .game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .game-image-container {
+    width: 100%;
+    height: 200px; /* Фиксированная высота для контейнера изображения */
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .game-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .game-card:hover .game-image-container::before {
+    opacity: 0.3;
+  }
+
+  .game-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Важно для сохранения пропорций */
+    object-position: center; /* Центрирование изображения */
+    transition: transform 0.3s ease;
+  }
+  
+  .game-card:hover .game-image {
+    transform: scale(1.05);
+  }
+  
+  .game-info {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .game-info h3 {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+  }
+  
+  .game-description {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+  }
+  
+  .game-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto; /* Прижимает кнопки к низу карточки */
+  }
+  
+  .add-game-btn {
+    background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  }
+
+  .add-game-btn:hover {
+    background-color: #00cc7d;
+    transform: translateY(-2px);
+  }
+  
+  .edit-btn {
+    background-color: transparent;
+    border: 2px solid #00ff9d;
+    color: #00ff9d;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+  }
+  
+  .edit-btn:hover {
+    background-color: rgba(0, 255, 157, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .delete-btn {
+    background-color: transparent;
+    border: 2px solid #ff4444;
+    color: #ff4444;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+  }
+  
+  .delete-btn:hover {
+    background-color: rgba(255, 68, 68, 0.1);
+    transform: translateY(-2px);
+  }
+
+  /* Стили для модального окна подтверждения удаления */
+.delete-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.delete-modal {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.delete-modal h3 {
+  color: #ff4444;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.delete-modal p {
+  color: #fff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.delete-modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.delete-modal-buttons .cancel-btn {
+  background-color: transparent;
+  border: 2px solid #00ff9d;
+  color: #00ff9d;
+}
+
+.delete-modal-buttons .delete-btn {
+  background-color: #ff4444;
+  border: none;
+  color: white;
+}
+
+.delete-modal-buttons button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.delete-modal-buttons .cancel-btn:hover {
+  background-color: rgba(0, 255, 157, 0.1);
+}
+
+.delete-modal-buttons .delete-btn:hover {
+  background-color: #ff2222;
+}
+
+  .details-btn, 
+  .add-game-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    flex: 1; /* Кнопки занимают равное пространство */
+  }
+  
+  .details-btn {
+    background-color: #4a5568;
+    color: white;
+  }
+  
+  .details-btn:hover {
+    background-color: #2d3748;
+  }
+  
+  
+  
+  .add-game-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(112, 0, 255, 0.3);
+  }
+  
+  .in-profile-badge {
+    padding: 8px 16px;
+    background-color: #2d3748;
+    color: #a0aec0;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-align: center;
+    flex: 1;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 40px;
+    color: #a0aec0;
+    grid-column: 1 / -1;
+  }
+  
+  .game-genre {
+    color: #4a90e2;
+    font-size: 0.9rem;
+    margin: 5px 0;
+  }
+  
+  .search-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 2px solid #3a3f4b;
+    border-radius: 8px;
+    background: #2a2f3b;
+    color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+  }
+  
+  .search-input::placeholder {
+    color: #6b7280;
+  }
+  
+  .search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(26, 26, 63, 0.8);
+    border-radius: 30px;
+    padding: 8px 16px;
+    width: 50px;
+    height: 50px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(112, 0, 255, 0.2);
+    overflow: hidden;
+  }
+  
+  .search-box.expanded {
+    width: 400px;
+    box-shadow: 0 0 20px rgba(112, 0, 255, 0.2);
+    border-color: var(--primary-color);
+  }
+  
+  .search-icon {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    min-width: 24px;
+    transition: all 0.3s ease;
+  }
+  
+  .search-box:hover .search-icon {
+    transform: scale(1.1);
+  }
+  
+  .search-box input {
+    background: transparent;
+    border: none;
+    padding: 8px 16px;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    width: 100%;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .search-box.expanded input {
+    opacity: 1;
+  }
+  
+  .search-box input:focus {
+    outline: none;
+  }
+  
+  .search-box input::placeholder {
+    color: var(--text-secondary);
+  }
+  
+  /* Анимация при наведении */
+  .search-box:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Эффект пульсации при фокусе */
+  .search-box.expanded::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 32px;
+    background: var(--gradient-primary);
+    z-index: -1;
+    opacity: 0.3;
+    animation: pulse 2s infinite;
+  }
+
+  /* Добавьте стили для случая, когда игры не найдены */
+  .no-results {
+    text-align: center;
+    padding: 40px;
+    color: #a0aec0;
+    grid-column: 1 / -1;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: scale(1.02);
+      opacity: 0.2;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Добавьте медиа-запросы для адаптивности */
+  @media (max-width: 768px) {
+    .search-box.expanded {
+      width: 90%;
+    }
+
+    .games-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      padding: 15px;
+    }
+  
+    .game-card {
+      height: 400px;
+    }
+  
+    .game-image-container {
+      height: 180px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .games-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 10px;
+    }
+  
+    .game-card {
+      height: auto;
+      min-height: 400px;
+    }
+  }
+
+  /* Стили для секции фильтрации */
+.filter-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.filters {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-group label {
+  color: #00ff9d;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.filter-select {
+  padding: 8px 15px;
+  border: 2px solid #00ff9d;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+.filter-select:hover {
+  border-color: #00cc7d;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #00ff9d;
+  box-shadow: 0 0 0 2px rgba(0, 255, 157, 0.2);
+}
+
+.filter-select option {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 8px;
+}
+
+.genre-filter {
+  padding: 10px 15px;
+  border: 2px solid #00ff9d;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.genre-filter:hover {
+  border-color: #00cc7d;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.genre-filter:focus {
+  outline: none;
+  border-color: #00ff9d;
+  box-shadow: 0 0 0 2px rgba(0, 255, 157, 0.2);
+}
+
+.genre-filter option {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 8px;
+}
+
+.games-count {
+  color: #00ff9d;
+  font-size: 0.9em;
+  padding: 8px 15px;
+  background: rgba(0, 255, 157, 0.1);
+  border-radius: 4px;
+}
+
+.no-games-message {
+  text-align: center;
+  color: #888;
+  padding: 40px;
+  font-size: 1.2em;
+}
+
+/* Анимация для фильтрации */
+.game-grid {
+  transition: all 0.3s ease;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.game-card {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .filters {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+}
+
+

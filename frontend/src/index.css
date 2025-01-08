@@ -1,0 +1,132 @@
+/* Глобальные стили */
+:root {
+  --primary-bg: #1a1d24;
+  --secondary-bg: #1E2028;
+  --accent-color: #61DAFB;
+  --text-primary: #ffffff;
+  --text-secondary: #6C7293;
+  --card-bg: #2A2D37;
+  --border-color: #3A3D47;
+  --hover-color: #4FA8C7;
+  --error-color: #FF6B6B;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--primary-bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Стили для основного контейнера */
+.app-container {
+  flex: 1;
+  background-color: var(--primary-bg);
+  background-repeat: repeat;
+  background-size: 200px;
+}
+
+/* Стили для карточек и контейнеров */
+.content-card {
+  background-color: var(--secondary-bg);
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+}
+
+/* Стили для кнопок */
+.button {
+  background-color: var(--accent-color);
+  color: var(--primary-bg);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(97, 218, 251, 0.2);
+}
+
+/* Стили для ссылок */
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--hover-color);
+}
+
+/* Стили для полей ввода */
+input, textarea, select {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(97, 218, 251, 0.2);
+}
+
+/* Стили для заголовков */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--accent-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* Стили для скроллбара */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}

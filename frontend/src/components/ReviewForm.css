@@ -1,0 +1,249 @@
+.review-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 10, 31, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+  animation: fadeIn 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.review-form-modal {
+  background: var(--background-light);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  animation: slideUp 0.4s ease;
+  border: 1px solid rgba(112, 0, 255, 0.2);
+  box-shadow: 0 0 30px rgba(112, 0, 255, 0.2);
+}
+
+.review-form-modal h2 {
+  color: var(--accent-color);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.review-form-modal h3 {
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+.rating-input {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.stars-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.star {
+  font-size: 2rem;
+  cursor: pointer;
+  color: #ccc;
+  transition: all 0.3s ease;
+}
+
+.star:hover,
+.star.filled {
+  color: #ffd700;
+  transform: scale(1.2);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.review-input textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 1rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(112, 0, 255, 0.2);
+  color: var(--text-primary);
+  font-size: 1rem;
+  resize: vertical;
+  transition: all 0.3s ease;
+}
+
+.review-input textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(112, 0, 255, 0.2);
+}
+
+.review-submitted {
+  text-align: center;
+  padding: 3rem !important;
+}
+
+.submission-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.submission-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--gradient-secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--background-dark);
+  margin-bottom: 1rem;
+  animation: scaleIn 0.5s ease;
+}
+
+.submission-message h2 {
+  color: var(--accent-color);
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.submission-message p {
+  color: var(--text-primary);
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  border: none;
+  border-radius: 10px;
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(112, 0, 255, 0.3);
+}
+
+.submit-button.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.submit-button.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  margin: -10px 0 0 -10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.submission-note {
+  color: var(--text-secondary) !important;
+  font-size: 0.9rem !important;
+  margin-top: 1rem !important;
+}
+
+.loading-animation {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.loading-dot {
+  width: 12px;
+  height: 12px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  animation: dotPulse 1.4s infinite ease-in-out;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.success-notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gradient-secondary);
+  color: var(--background-dark);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  animation: slideUp 0.3s ease, fadeOut 0.3s ease 2.7s;
+  z-index: 1100;
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(0.3);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
